@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>nep.w</title>
+  <style>
+    body {
+      margin: 2vw;
+      background-color: #fff;
+      color: #000;
+    }
+
+    #neplol {
+      color: red;
+    }
+
+    #hide {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-weight: bold;
+      user-select: none;
+      cursor: default;
+    }
+
+    #hide:hover {
+      text-decoration: underline;
+    }
+
+    #hand {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(0%);
+      transition: 0.15s linear transform;
+      filter: drop-shadow(4px 4px 2px red);
+      width: 100vmax;
+    }
+
+    .icon-container {
+      position: absolute;
+      right: 2rem;
+      bottom: 2rem;
+      .x-icon,
+      .twitter-icon {
+        height: 5vw;
+        position: absolute;
+      }
+      .x-icon {
+        opacity: 0;
+      }
+    }
+    .icon-container:hover {
+      .x-icon {
+        opacity: 1;
+      }
+      .twitter-icon {
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1><span id="neplol">ねぷろる</span>を直視してはならない</h1>
+  <a href="https://unityroom.com/games/thesun">リンク</a>
+
+  <a class="icon-container" href="https://x.com/nep_IoI">
+    <img class="twitter-icon" src="./twitter-icon.png" alt="twitter">
+    <img class="x-icon" src="./x-icon.png" alt="x">
+  </a>
+
+  <div id="hide">隠し文字</div>
+  <img id="hand" src="./hand.png" alt="">
+
+  <audio id="horror" src="./horror.mp3"></audio>
+  <audio id="bikkuri" src="./bikkuri.mp3"></audio>
+
+  <script>
+    const neplol = document.getElementById("neplol");
+    let percent = 0;
+    function loop(params) {
+      if (percent < 1) {
+        if (neplol.matches(":hover")) {
+          console.log(percent);
+          percent < 1 ? percent += 0.005 : null;
+          percent > 1 ? percent = 1 : null;
+        } else {
+          console.log(percent);
+          percent > 0 ? percent -= 0.005 : null;
+          percent < 0 ? percent = 0 : null;
+        }
+        document.body.style.backgroundColor = `hsl(0deg, 0%, ${100 - percent * 100}%)`;
+        requestAnimationFrame(loop);
+      } else {
+        document.getElementById("horror").play();
+        document.querySelector('.x-icon').style.filter = "invert(100%)";
+        document.getElementById("hide").addEventListener('click', () => {
+          console.log("clicked");
+          document.getElementById("hide").style.opacity = 0;
+          document.getElementById("hand").style.transform = "translate(-50%, -50%) scale(200%)";
+          document.getElementById("bikkuri").play();
+          setTimeout(() => {
+            window.close();
+          }, 2000);
+        });
+        // End of loop
+      }
+    }
+    loop();
+  </script>
+</body>
+
+</html>
