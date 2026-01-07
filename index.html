@@ -10,6 +10,7 @@
       margin: 2vw;
       background-color: #fff;
       color: #000;
+      overflow: hidden;
     }
 
     #neplol {
@@ -45,19 +46,23 @@
       position: absolute;
       right: calc(1rem + 6vw);
       bottom: calc(1rem + 5vw);
+
       .x-icon,
       .twitter-icon {
         height: 5vw;
         position: absolute;
       }
+
       .x-icon {
         opacity: 0;
       }
     }
+
     .icon-container:hover {
       .x-icon {
         opacity: 1;
       }
+
       .twitter-icon {
         opacity: 0;
       }
@@ -97,7 +102,7 @@
         document.body.style.backgroundColor = `hsl(0deg, 0%, ${100 - percent * 100}%)`;
         requestAnimationFrame(loop);
       } else {
-        document.getElementById("horror").play();
+        document.getElementById("horror").play(); // Consider that it won't work if user have never interacted with it
         document.querySelector('.x-icon').style.filter = "invert(100%)";
         document.getElementById("hide").addEventListener('click', () => {
           console.log("clicked");
@@ -105,7 +110,7 @@
           document.getElementById("hand").style.transform = "translate(-50%, -50%) scale(200%)";
           document.getElementById("bikkuri").play();
           setTimeout(() => {
-            window.close();
+            window.close(); // This won't work
           }, 2000);
         });
         // End of loop
