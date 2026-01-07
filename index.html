@@ -91,11 +91,11 @@
     function loop(params) {
       if (percent < 1) {
         if (neplol.matches(":hover")) {
-          percent < 1 ? percent += 0.005 : null;
-          percent > 1 ? percent = 1 : null;
+          percent += percent < 1 ? 0.005 : 0;
+          percent = percent > 1 ? 1 : percent;
         } else {
-          percent > 0 ? percent -= 0.005 : null;
-          percent < 0 ? percent = 0 : null;
+          percent -= percent > 0 ? 0.005 : 0;
+          percent = percent < 0 ? 0 : percent;
         }
         document.body.style.backgroundColor = `hsl(0deg, 0%, ${100 - percent * 100}%)`;
         requestAnimationFrame(loop);
