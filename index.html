@@ -91,11 +91,9 @@
     function loop(params) {
       if (percent < 1) {
         if (neplol.matches(":hover")) {
-          console.log(percent);
           percent < 1 ? percent += 0.005 : null;
           percent > 1 ? percent = 1 : null;
         } else {
-          console.log(percent);
           percent > 0 ? percent -= 0.005 : null;
           percent < 0 ? percent = 0 : null;
         }
@@ -105,12 +103,11 @@
         document.getElementById("horror").play(); // Consider that it won't work if user have never interacted with it
         document.querySelector('.x-icon').style.filter = "invert(100%)";
         document.getElementById("hide").addEventListener('click', () => {
-          console.log("clicked");
           document.getElementById("hide").style.opacity = 0;
           document.getElementById("hand").style.transform = "translate(-50%, -50%) scale(200%)";
           document.getElementById("bikkuri").play();
           setTimeout(() => {
-            window.close(); // This won't work
+            window.close(); // This behavior is restricted
           }, 2000);
         });
         // End of loop
